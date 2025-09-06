@@ -650,10 +650,6 @@
           class="w-full text-white bg-[#1788ae] hover:bg-[#1280a4] focus:ring-4 focus:ring-[#4489a0] font-medium rounded-lg text-sm px-5 py-2.5 mb-2 focus:outline-none">
           Send
         </button>
-
-        <p id="formResponse" class="hidden text-green-600 text-center font-medium mt-4 transition-opacity duration-500">
-          ✅ Thank you! Your message has been sent.
-        </p>
       </form>
 
     </div>
@@ -748,38 +744,10 @@
     backBtn.addEventListener('click', () => {
       aboutMe.style.display = 'none'
     })
+
+    const contactForm = document.querySelector('#contactForm')
+    contactForm.reset()
   </script>
-
-  <script>
-    document.getElementById("contactForm").addEventListener("submit", async function (e) {
-      e.preventDefault();
-      const form = e.target;
-      const formData = new FormData(form);
-      const responseEl = document.getElementById("formResponse");
-
-      // Convert FormData to URL-encoded string
-      const data = new URLSearchParams(formData).toString();
-
-      try {
-        await fetch("/", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: data,
-        });
-
-        // Reset the form
-        form.reset();
-
-        // Show success message with fade-in
-        responseEl.classList.remove("hidden");
-        responseEl.style.opacity = 0;
-        setTimeout(() => (responseEl.style.opacity = 1), 50);
-      } catch (error) {
-        alert("❌ Something went wrong. Try again!");
-      }
-    });
-  </script>
-
 </body>
 
 </html>
