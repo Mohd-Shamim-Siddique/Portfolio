@@ -611,19 +611,14 @@
         <img src="./assets/images/contact-me.svg" alt="phone" />
       </div>
 
-      <!-- ✅ Contact Form -->
       <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" id="contactForm"
-        class="w-full max-w-lg mx-auto p-6 bg-slate-600  shadow-md rounded-xl">
+        class="w-full max-w-lg mx-auto p-6 bg-slate-600 shadow-md rounded-xl">
 
-        <!-- Hidden input required by Netlify -->
         <input type="hidden" name="form-name" value="contact" />
-
-        <!-- Honeypot -->
         <p class="hidden">
           <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
         </p>
 
-        <!-- Name -->
         <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Name</label>
         <div class="relative mb-4">
           <input type="text" id="name" name="name" required
@@ -631,7 +626,6 @@
             placeholder="Enter your name" />
         </div>
 
-        <!-- Email -->
         <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Your Email</label>
         <div class="relative mb-4">
           <input type="email" id="email" name="email" required
@@ -639,7 +633,6 @@
             placeholder="name@example.com" />
         </div>
 
-        <!-- Message -->
         <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Message</label>
         <div class="relative mb-4">
           <textarea id="message" name="message" rows="5" required
@@ -647,17 +640,16 @@
             placeholder="Your message..."></textarea>
         </div>
 
-        <!-- Submit -->
         <button type="submit"
           class="w-full text-white bg-[#1788ae] hover:bg-[#1280a4] focus:ring-4 focus:ring-[#4489a0] font-medium rounded-lg text-sm px-5 py-2.5 mb-2 focus:outline-none">
           Send
         </button>
 
-        <!-- Success Message -->
         <p id="formResponse" class="hidden text-green-600 text-center font-medium mt-4 transition-opacity duration-500">
           ✅ Thank you! Your message has been sent.
         </p>
       </form>
+
     </div>
 
   </section>
@@ -752,7 +744,6 @@
     })
   </script>
 
-
   <script>
     document.getElementById("contactForm").addEventListener("submit", async function (e) {
       e.preventDefault();
@@ -760,12 +751,23 @@
       const formData = new FormData(form);
       const responseEl = document.getElementById("formResponse");
 
+      // Convert FormData to URL-encoded string
+      const data = new URLSearchParams(formData).toString();
+
       try {
-        await fetch("/", { method: "POST", body: formData });
+        await fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: data,
+        });
+
+        // Reset the form
         form.reset();
+
+        // Show success message with fade-in
         responseEl.classList.remove("hidden");
         responseEl.style.opacity = 0;
-        setTimeout(() => responseEl.style.opacity = 1, 50); // Smooth fade-in
+        setTimeout(() => (responseEl.style.opacity = 1), 50);
       } catch (error) {
         alert("❌ Something went wrong. Try again!");
       }
