@@ -611,9 +611,9 @@
       </div>
 
       <!-- ✅ Netlify form setup -->
-      <form name="contactUS" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" class="w-full">
+      <form action="./thank-you.html" name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" class="w-full">
         <!-- ✅ Hidden input required by Netlify -->
-        <input type="hidden" name="form-name" value="contactUS" />
+        <input type="hidden" name="form-name" value="contact" />
 
         <!-- ✅ Honeypot field (hidden from users, visible to bots) -->
         <p class="hidden">
@@ -643,7 +643,7 @@
                 d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
             </svg>
           </div>
-          <input type="text" id="email" name="email"
+          <input type="email" id="email" name="email"
             class="bg-gray-50 border-2 outline-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#1788ae] focus:border-[#1788ae] block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
             placeholder="name@procodrr.com" />
         </div>
